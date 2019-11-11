@@ -1,0 +1,19 @@
+Q1
+type T = 
+	| A of T list
+	| B of bool
+	| C of (T * T)
+
+Q2
+A can contain of a list of values in type T, i.e. A, B, and C
+B is a bool, and will only contain either true or false
+C is a tuple and contain values of type T, i.e. A, B, and C
+
+Q3
+In the first value, it's a simple empty list. We can write let l1 = A []
+ 
+The second value is relatively simple as well, since B is just a bool. We can write let l2 = B true
+
+Since the third value contains a tuple, we write let l3 = C(A [B false; B true],B true). The list A is contained as a value in the tuple C, and the bool B is another value of tuple C. Inside the list A are contained two bool B. Because A and C can contain components of type T, this is allowed.
+
+It's much the same for the fourth value. We write let l4 = C(A [B true; C(A [B true], B true);B false], A [B true; C(A [B true],B true);B false]). This one is more complicated, but it's still able to be explained by our rules. Tuple C contains a list A, and another list A. In the first list A, we have a bool B, a tuple C, and a bool B. The tuple C a list A containing a bool B, and a bool B. In the second list A of the main tuple C, we have a bool B, a tuple C, and a bool B. In this tuple C, we have another list A containing a bool B, and bool B. Because both A and C can contain type T components within themselves, they can behave similarly to a Chinese box, able to place lists inside of tuples inside of lists inside of etc. 
